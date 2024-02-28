@@ -7,7 +7,6 @@ import pickle
 import warnings
 warnings.simplefilter("ignore")
 
-
 def get_user_recommendations(username):
 
     # load user final ratings
