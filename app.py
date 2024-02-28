@@ -1,6 +1,5 @@
 from flask import Flask, render_template, request
 import recommend
-from modelfactory import ModelFactory
 
 app = Flask(__name__, template_folder='templates')
 
