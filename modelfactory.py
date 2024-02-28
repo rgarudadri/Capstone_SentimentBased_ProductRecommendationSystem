@@ -1,6 +1,5 @@
 import copy
 
-
 class ModelFactory:
     def __init__(self, model, model_name, X_train, y_train, X_test, y_test):
         self.model = model
