@@ -2,7 +2,6 @@ import numpy as np
 import pandas as pd
 from sklearn.model_selection import train_test_split
 from sklearn.metrics.pairwise import pairwise_distances
-from modelfactory import ModelFactory
 from constants import *
 import pickle
 import warnings
@@ -26,7 +25,7 @@ def get_user_recommendations(username):
 
         # load the model
         with open(MODEL_PICKLE_FILENAME, 'rb') as f:
-            lr_smote_obj = pd.read_pickle(f)
+            lr_smote_pkl_obj = pd.read_pickle(f)
 
         ebuss_recommend_df = preprocessed_data[RECOMMENDED_DF_COLS]
         # get the top 20  recommedation using the user_final_rating
@@ -38,9 +37,8 @@ def get_user_recommendations(username):
 
         # Recommended model was LR SMOTE (with class imbalance handled)
         # So using the same to predict
-        lr_smote_obj.set_test_data(X)
-
-        common_top20_reco['sentiment_pred'] = lr_smote_obj.predict()
+        lr_smote_obj = lr_smote_pkl_obj.deep_copy()
+        common_top20_reco['sentiment_pred'] = lr_smote_obj.predict(X)
 
         temp_df = common_top20_reco.groupby(by='name').sum()
         # Create a new dataframe "sent_df" to store the count of positive user sentiments
