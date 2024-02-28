@@ -1,0 +1,7 @@
+Flask
+nltk
+numpy
+pandas
+pickle5
+re
+scikit-learn
